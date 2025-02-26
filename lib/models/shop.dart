@@ -20,21 +20,21 @@ class Shop extends ChangeNotifier {
     ),
     // product 3
     Product(
-      name: "Product 1",
+      name: "Product 3",
       price: 99.99,
       description: "Item description..",
         imagePath: "assets/insilveroutfit.jpeg"
     ),
     // product 4
     Product(
-      name: "Product 1",
+      name: "Product 4",
       price: 99.99,
       description: "Item description..",
         imagePath: "assets/ornateearring.jpeg"
     ),
     // product 5
     Product(
-      name: "Product 1",
+      name: "Product 5",
       price: 99.99,
       description: "Item description..",
         imagePath: "assets/sereneportrait.jpeg"

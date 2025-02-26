@@ -16,7 +16,7 @@ class ShopPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
-        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+        foregroundColor: Theme.of(context).colorScheme.onSurface,
         centerTitle: true,
         actions: [
           IconButton(
@@ -27,50 +27,53 @@ class ShopPage extends StatelessWidget {
       ),
       drawer: const MyDrawer(),
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: ListView(
+      body: Column(
         children: [
-          const SizedBox(
-            height: 10,
-          ),
-
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+          Expanded(
+            child: ListView(
+              shrinkWrap: true,
               children: [
-                // shop title
-                Text(
-                  "Shop",
-                  style: TextStyle(
-                      fontSize: 22,
-                      color: Theme.of(context).colorScheme.inversePrimary),
+                const SizedBox(
+                  height: 10,
                 ),
 
-                // subtitle
-                Text(
-                  "Pick from a selected list of premium products",
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.inversePrimary),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // shop title
+                      Text("Shop",
+                          style: TextStyle(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  fontSize: 25)),
+
+                      // subtitle
+                      Text("Pick from a selected list of premium products",
+                          style: TextStyle(
+                                  color: Theme.of(context).colorScheme.primary)),
+                    ],
+                  ),
+                ),
+
+                //product tiles
+                SizedBox(
+                  height: 550,
+                  child: ListView.builder(
+                      itemCount: products.length,
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.all(15),
+                      itemBuilder: (context, index) {
+                        // get each individual product
+                        final product = products[index];
+
+                        // return as a product tile UI
+                        return MyProductTile(product: product);
+                      }),
                 ),
               ],
             ),
-          ),
-
-          //product tiles
-          SizedBox(
-            height: 550,
-            child: ListView.builder(
-                itemCount: products.length,
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.all(15),
-                itemBuilder: (context, index) {
-                  // get each individual product
-                  final product = products[index];
-
-                  // return as a product tile UI
-                  return MyProductTile(product: product);
-                }),
           ),
         ],
       ),

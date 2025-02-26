@@ -7,7 +7,7 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Theme.of(context).colorScheme.background,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -19,7 +19,7 @@ class MyDrawer extends StatelessWidget {
                   child: Icon(
                     Icons.shopping_bag,
                     size: 72,
-                    color: Theme.of(context).colorScheme.inversePrimary,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ),
@@ -41,7 +41,6 @@ class MyDrawer extends StatelessWidget {
                 onTap: () {
                   Navigator.pop(context, "/shop_page");
                   Navigator.pushNamed(context, "/cart_page");
-
                 },
               ),
             ],

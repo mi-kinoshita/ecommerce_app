@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/components/my_button.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
@@ -7,34 +8,37 @@ class IntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // LOGO
-              Icon(
-                Icons.shopping_bag,
-                size: 72,
-                color: Theme.of(context).colorScheme.primary,
-              ),
+          children: [
+            // LOGO
+            Lottie.asset("assets/cart_anime.json"),
 
-              const SizedBox(height: 25,),
+            Text("SHOP FOR YOU",
+                style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary, fontSize: 32)),
 
-              const Text("Watch Store", style: TextStyle(fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                  ),),
+            const SizedBox(
+              height: 5,
+            ),
 
-              const SizedBox(height: 25,),
+            Text(
+              "Premium Quality Products",
+                style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary)),
 
-              Text("Premium Quality Products",
-              style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
-              ),
 
-              const SizedBox(height: 25,),
+            const SizedBox(
+              height: 35,
+            ),
 
-              MyButton(onTap: ()=>Navigator.pushNamed(context, "/shop_page"), child: Icon(Icons.arrow_forward, size: 32,),)
-            ],
+            MyButton(
+              onTap: () => Navigator.pushNamed(context, "/shop_page"),
+              child: Text("Enter",)
+            )
+          ],
         ),
       ),
     );

@@ -13,11 +13,11 @@ class MyListTile extends StatelessWidget {
       child: ListTile(
         leading: Icon(
           icon,
-          color: Theme.of(context).colorScheme.inversePrimary,
+          color: Colors.grey[700],
         ),
         title: Text(
           title,
-          style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+          style: TextStyle(color: Colors.grey[700]),
         ),
         onTap: onTap,
       ),

@@ -13,14 +13,9 @@ class MyProductTile extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        title: const Text("Attention"),
         content: const Text("Add this item to your cart?"),
         actions: [
-          //cancel button
-          MaterialButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("Cancel"),
-          ),
-
           //yes button
           MaterialButton(
             onPressed: () {
@@ -31,6 +26,11 @@ class MyProductTile extends StatelessWidget {
             },
             child: const Text("Yes"),
           ),
+          //cancel button
+          MaterialButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Cancel"),
+          ),
         ],
       ),
     );
@@ -38,75 +38,77 @@ class MyProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primaryContainer,
-          borderRadius: BorderRadius.circular(12)),
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.all(25),
-      width: 250,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              //image
-              // Image(image: AssetImage(product.imagePath)),
-              AspectRatio(
-                aspectRatio: 1,
-                child: Container(
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(
+        context,
+        '/product_page',
+        arguments: product,
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.secondaryContainer,
+            borderRadius: BorderRadius.circular(12)),
+        margin: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(25),
+        width: 250,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                // image
+                AspectRatio(
+                  aspectRatio: 1,
+                  child: Container(
                     decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surface,
                         borderRadius: BorderRadius.circular(12)),
                     width: double.infinity,
-                    padding: const EdgeInsets.all(25),
-                    child: Image.asset(product.imagePath)),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              //name
-              Text(
-                product.name,
-                style: TextStyle(
+                    padding: const EdgeInsets.all(2),
+                    child: Image.asset(product.imagePath),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                // name
+                Text(
+                  product.name,
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
-                    color: Theme.of(context).colorScheme.inversePrimary),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              //description
-              Text(
-                product.description,
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.inversePrimary),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          //price
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "\$${product.price.toStringAsFixed(2)}",
-              ),
-              //add to cart button
-              Container(
-                decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.inversePrimary,
-                    borderRadius: BorderRadius.circular(12)),
-                child: IconButton(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                // description
+                Text(
+                  product.description,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            // price
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("\$${product.price.toStringAsFixed(2)}"),
+                // add to cart button
+                Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: IconButton(
                     onPressed: () => addToCart(context),
-                    icon: const Icon(Icons.add)),
-              )
-            ],
-          )
-        ],
+                    icon: const Icon(Icons.add),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
