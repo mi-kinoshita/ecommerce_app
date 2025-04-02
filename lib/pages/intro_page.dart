@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/components/my_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -8,7 +9,7 @@ class IntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -16,7 +17,7 @@ class IntroPage extends StatelessWidget {
             // LOGO
             Lottie.asset("assets/cart_anime.json"),
 
-            Text("SHOP FOR YOU",
+            Text("MY ARTIST",
                 style: TextStyle(
                         color: Theme.of(context).colorScheme.primary, fontSize: 32)),
 
@@ -25,7 +26,7 @@ class IntroPage extends StatelessWidget {
             ),
 
             Text(
-              "Premium Quality Products",
+              "Premium Quality Services",
                 style: TextStyle(
                         color: Theme.of(context).colorScheme.primary)),
 
@@ -35,8 +36,17 @@ class IntroPage extends StatelessWidget {
             ),
 
             MyButton(
-              onTap: () => Navigator.pushNamed(context, "/shop_page"),
-              child: Text("Enter",)
+              onTap: () {
+                final user = FirebaseAuth.instance.currentUser;
+                if (user != null) {
+                  print(user);
+                  Navigator.pushNamed(context, "/top_page");
+                } else {
+                  Navigator.pushNamed(context, "/login_page");
+                }
+                // Navigator.pushNamed(context, "/top_page");
+              },
+              child: const Text("Enter"),
             )
           ],
         ),

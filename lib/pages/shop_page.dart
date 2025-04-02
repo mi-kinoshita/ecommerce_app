@@ -3,6 +3,9 @@ import 'package:ecommerce_app/components/my_product_tile.dart';
 import 'package:ecommerce_app/models/shop.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:badges/badges.dart' as badges;
+import 'package:badges/badges.dart';
+
 
 class ShopPage extends StatelessWidget {
   const ShopPage({super.key});
@@ -11,6 +14,7 @@ class ShopPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // access products in shop
     final products = context.watch<Shop>().shop;
+    final int cartItemCount = context.watch<Shop>().cart.length;
 
     return Scaffold(
       appBar: AppBar(
@@ -19,9 +23,16 @@ class ShopPage extends StatelessWidget {
         foregroundColor: Theme.of(context).colorScheme.onSurface,
         centerTitle: true,
         actions: [
-          IconButton(
-            onPressed: () => Navigator.pushNamed(context, "/cart_page"),
-            icon: const Icon(Icons.shopping_cart_outlined),
+          badges.Badge(
+            position: BadgePosition.topEnd(top: 0, end: 3),
+            badgeContent: Text(
+              "$cartItemCount",
+              style: const TextStyle(color: Colors.white),
+            ),
+            child: IconButton(
+              onPressed: () => Navigator.pushNamed(context, "/cart_page"),
+              icon: const Icon(Icons.shopping_cart_outlined),
+            ),
           ),
         ],
       ),
@@ -44,7 +55,7 @@ class ShopPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // shop title
-                      Text("Shop",
+                      Text("Shop Name",
                           style: TextStyle(
                                   color: Theme.of(context).colorScheme.primary,
                                   fontSize: 25)),
@@ -71,6 +82,15 @@ class ShopPage extends StatelessWidget {
                         // return as a product tile UI
                         return MyProductTile(product: product);
                       }),
+                ),
+                const SizedBox(height: 10,),
+                // shop title
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Text("Recommend",
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontSize: 25)),
                 ),
               ],
             ),
